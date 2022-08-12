@@ -49,9 +49,6 @@ def extractMeta(image):
     if verbose:
         print(f"\n{image}")
 
-    img_name = image.split("/")[-1]
-    img_name = img_name.split(".")[0]
-
     ####################
     # Extract Metadata #
     ####################
@@ -65,20 +62,19 @@ def extractMeta(image):
         metadata = et.get_metadata(image)
 
     # Openstreetmap url generation
-    meta[f"pdf_feeder:{img_name}"] = dict()
     if "EXIF:GPSLatitude" in metadata.keys():
         lat = metadata["EXIF:GPSLatitude"]
         lon = metadata["EXIF:GPSLongitude"]
-        meta[f"pdf_feeder:{img_name}"]["openstreetmap"] = f"https://www.openstreetmap.org/?mlat={lat}&mlon={lon}&zoom=12"
+        meta[f"image_feeder:openstreetmap"] = f"https://www.openstreetmap.org/?mlat={lat}&mlon={lon}&zoom=12"
     
     for key in metadata.keys():
-        meta[f"pdf_feeder:{key}"] = metadata[key]
+        meta[f"image_feeder:{key}"] = metadata[key]
 
     with open(image, 'rb') as read_image:
         i = read_image.read()
         b = bytearray(i)
     
-    data = hashlib.sha1(open(image, 'rb').read()).hexdigest()
+    data = b
 
     pushToAIl(data, meta)
 
