@@ -1,15 +1,16 @@
-import os
-import exiftool
 import argparse
 import configparser
-from pyail import PyAIL
 import hashlib
+import os
+
+import exiftool
+from pyail import PyAIL
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 uuid = "1552b4bb-067b-403a-8a2f-e4c8b36b5c6e"
 
 ## Config
-pathConf = '../etc/ail-feeder-image.cfg'
+pathConf = os.path.join(dir_path, '../etc/ail-feeder-image.cfg')
 
 if os.path.isfile(pathConf):
     config = configparser.ConfigParser()
