@@ -27,7 +27,7 @@ if 'ail' in config:
     ail_key = config['ail']['apikey']
 
 
-def pushToAIl(data, meta):
+def pushToAIL(data, meta):
     """Push json to AIL"""
     default_encoding = 'UTF-8'
 
@@ -77,7 +77,7 @@ def extractMeta(image):
     
     data = b
 
-    pushToAIl(data, meta)
+    pushToAIL(data, meta)
 
 
 def recursiveFolder(folder):
